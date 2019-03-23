@@ -8,7 +8,7 @@ import os
 from app import app
 from flask import render_template, request, redirect, url_for, flash, session, abort
 from werkzeug.utils import secure_filename
-
+from forms import UploadForm
 
 ###
 # Routing for your application.
@@ -24,7 +24,15 @@ def home():
 def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
-
+    
+@app.route('/uploads/')
+def upload_form():
+    """"Render the website uploads"""
+    return render_template('upload.html')
+if UploadForm.validate_on_submit():
+    return redirect('/success')
+    filename = secure_filename(file.UploadForm)
+    
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
