@@ -25,14 +25,6 @@ def about():
     """Render the website's about page."""
     return render_template('about.html', name="Mary Jane")
     
-@app.route('/uploads/')
-def upload_form():
-    """"Render the website uploads"""
-    return render_template('upload.html')
-if UploadForm.validate_on_submit():
-    return redirect('/success')
-    filename = secure_filename(file.UploadForm)
-    
 
 @app.route('/upload', methods=['POST', 'GET'])
 def upload():
@@ -40,15 +32,23 @@ def upload():
         abort(401)
 
     # Instantiate your form class
+    
+@app.route('/uploads/')
+def upload_form():
+    """"Render the website uploads"""
+    return render_template('upload.html')
+return redirect('/success')
+filename = secure_filename(file.UploadForm)
 
     # Validate file upload on submit
+if UploadForm.validate_on_submit():
     if request.method == 'POST':
         # Get file data and save to your uploads folder
 
         flash('File Saved', 'success')
-        return redirect(url_for('home'))
+return redirect(url_for('home'))
 
-    return render_template('upload.html')
+return render_template('upload.html')
 
 
 @app.route('/login', methods=['POST', 'GET'])
